@@ -3,10 +3,10 @@ import numpy as np
 class Item():
     """Class that defines a single item for the bin packing problem"""
     def __init__(self):
-        self.ressources = np.zeros(0, dtype="i")
+        self.resources = np.zeros(0, dtype="i")
 
     def set_item(self, ressource_vec):
-        self.ressources = ressource_vec
+        self.resources = ressource_vec
 
 
 
@@ -24,30 +24,30 @@ class Bin():
     def insert_item(self, item):
         """Inserts an item into the bin and ads it to the current capacity"""
         self.items = np.append(self.items, item)
-        self.remaining_cap= np.subtract(self.remaining_cap, item.ressources)
+        self.remaining_cap= np.subtract(self.remaining_cap, item.resources)
 
     def print_items(self):
         """Prints the contents of the item list"""
         item_list = []
         for n in range(0, len(self.items)):
-            item_list.append(self.items[n].ressources)
+            item_list.append(self.items[n].resources)
 
         print(item_list)
 
 
 
-test_bin = Bin()
-test_bin.set_capacity(np.array([1,2,3,5]))
+# test_bin = Bin()
+# test_bin.set_capacity(np.array([1,2,3,5]))
 
-print(test_bin.max_cap)
+# print(test_bin.max_cap)
 
-test_item = Item()
-test_item.set_item(np.array([1,1,1,1]))
+# test_item = Item()
+# test_item.set_item(np.array([1,1,1,1]))
 
-test_bin.insert_item(test_item)
-test_bin.insert_item(test_item)
+# test_bin.insert_item(test_item)
+# test_bin.insert_item(test_item)
 
-test_bin.print_items()
+# test_bin.print_items()
 
 
-print(test_bin.remaining_cap)
+# print(test_bin.remaining_cap)
