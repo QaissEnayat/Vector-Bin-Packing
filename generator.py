@@ -55,16 +55,16 @@ def print_item_list(items):
 
 def print_bin_list(bin_list):
     for n in range(0, len(bin_list)):
-        print(f"Bin{n+1} - Max Capacity: {bin_list[n].max_cap}, Remaining: {bin_list[n].remaining_cap}, Items: {bin_list[n].items}")
+        print(f"Bin{n+1} - Max Capacity: {bin_list[n].max_cap}, Remaining: {bin_list[n].remaining_cap}, Items: {[item.resources for item in bin_list[n].items]}")
 
 item = random_item(min_resource=MIN_RESOURCE, max_resource=MAX_RESOURCE, 
                    dim=ITEM_DIMENSION)
 
 # print(item.resources)
 
-item_list = generate_item_list(10)
+#item_list = generate_item_list(10)
 # print('Item set: ',len(item_list))
-print_item_list(item_list)
+#print_item_list(item_list)
 
 
 # bin = random_bin(MIN_CAPACITY,MAX_CAPACITY, ITEM_DIMENSION)
