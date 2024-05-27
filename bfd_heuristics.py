@@ -4,7 +4,6 @@ from functions import *
 
 def bfd_item_centric(items, bins):
     """Places Items into bins with BFD Item Centric algorithm."""
-    # TODO: sort items list
     items = sorted(items, key=resource_sum, reverse=True)
     
     while len(items) != 0:
@@ -17,11 +16,11 @@ def bfd_item_centric(items, bins):
             if  np.all(biggest_item <= bin.remaining_cap == False):
                 continue
             bin.insert_item(biggest_item)
-        #if biggest_item != placed():
-        #    return print('Item {biggest_item} cannot be packed into {bins[i]}!') 
-        # If finished
+            bins = sorted(bins, key=bin_remaining_cap_sum, reverse=True)
         items.pop(0)
-
+    # TODO: return Bins with items
+    print_bin_list(bins)
+    return bins
 
 def bfd_bin_centric(items, bins):
     """Places Items into bins with BFD Bin Centric algorithm."""
