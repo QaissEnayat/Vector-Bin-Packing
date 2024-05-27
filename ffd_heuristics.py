@@ -25,7 +25,7 @@ def ffd_bin_centric(bin_list, item_list, measure=resource_sum, bin_measure=bin_r
     "Bin centric first fit decrease algorithm"
 
     bin_list = sorted(bin_list, key=bin_measure, reverse=True)
-     item_list = sorted(item_list, key=measure, reverse=True)
+    item_list = sorted(item_list, key=measure, reverse=True)
     for bin in bin_list:
        
 
