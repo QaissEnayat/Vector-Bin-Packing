@@ -3,7 +3,7 @@ from random import randint
 import numpy as np
 
 ITEM_DIMENSION = 3
-MAX_RESOURCE = 10
+MAX_RESOURCE = 20
 MIN_RESOURCE = 1
 MAX_CAPACITY = 50
 MIN_CAPACITY = 40
@@ -52,7 +52,7 @@ def generate_bin_list(bin_num):
 
 def print_item_list(items):
     items_list = [item.resources for item in items]
-    print(items_list)
+    print(np.array(items_list).tolist())
 
 def print_bin_list(bin_list):
     for n in range(0, len(bin_list)):
