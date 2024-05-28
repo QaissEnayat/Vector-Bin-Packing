@@ -5,6 +5,7 @@ from functions import *
 
 
 def ffd_item_centric(bin_list, item_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum):
+    """Item centric first fit decrease algorithm"""
     print_item_list(item_list)
 
     bin_list = sorted(bin_list, key=bin_measure, reverse=True)
@@ -31,19 +32,18 @@ def ffd_bin_centric(bin_list, item_list, measure=resource_sum, bin_measure=bin_r
     item_list = sorted(item_list, key=measure, reverse=True)
     for bin in bin_list:
        
-
         while item_list:
-            if min(np.subtract(bin.remaining_cap, item_list[0].resources)) < 0:
+            if np.all(item_list[0].resources <= bin.remaining_cap) == False:
                      break
                      
             bin.insert_item(item_list[0])
             item_list.pop(0)
             print_item_list(item_list)
-
-        ## TODO Implement Failure Condition
     
     if item_list:
-         print(f"Packing failed. {len(item_list)} Items still remain")
+       return print(f"Failed to pack {item_list[0].resources}.")
+    
+    return bin_list
 
 
 def bin_balancing(bin_list, item_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum):
@@ -74,8 +74,8 @@ item_list = generate_item_list(10)
 
 
 
-# ffd_bin_centric(bin_list, item_list, measure=resource_prod)
-ffd_item_centric(bin_list, item_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum)
+ffd_bin_centric(bin_list, item_list, measure=resource_prod, bin_measure=bin_remaining_cap_prod)
+# ffd_item_centric(bin_list, item_list, measure=resource_prod, bin_measure=bin_remaining_cap_prod)
 
 print_bin_list(bin_list)
 
