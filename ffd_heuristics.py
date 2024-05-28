@@ -47,35 +47,44 @@ def ffd_bin_centric(bin_list, item_list, measure=resource_sum, bin_measure=bin_r
 
 
 def bin_balancing(bin_list, item_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum):
+    """First fit decrease algorithm with bin balancing"""
 
-    bin_list = sorted(item_list, key=measure, reverse=True)
+    bin_list = sorted(bin_list, key=bin_measure, reverse=True)
     item_list = sorted(item_list, key=measure, reverse=True)
 
     while item_list:
-        for bin in bin_list:
-            if not min(np.subtract(bin.remaining_cap, item_list[0].resources)) < 0:
-                bin.insert_item(item_list[0])
+        for i in range(0, len(bin_list)):
+            if not np.all(item_list[0].resources <= bin_list[i].remaining_cap) == False:
+                bin_list[i].insert_item(item_list[0])
                 item_list.pop(0)
 
-                ### TODO Update bin list here
+                # Update bin list
+                bin_list.append(bin_list[i])
+                bin_list.pop(i)
 
+                print_bin_list(bin_list)
+
+                print_item_list(item_list)
                 break
 
-            ###TODO Return failure if item could not be packet
+            elif i == len(bin_list)-1 and np.all(item_list[0].resources <= bin_list[i].remaining_cap) == False:
+                return print(f"Failed to pack {item_list[0].resources}.")
+
+    return bin_list
 
 
 
 
 
 
-
-bin_list = generate_bin_list(2)
+bin_list = generate_bin_list(4)
 item_list = generate_item_list(10)
 
 
 
-ffd_bin_centric(bin_list, item_list, measure=resource_prod, bin_measure=bin_remaining_cap_prod)
+# ffd_bin_centric(bin_list, item_list, measure=resource_prod, bin_measure=bin_remaining_cap_prod)
 # ffd_item_centric(bin_list, item_list, measure=resource_prod, bin_measure=bin_remaining_cap_prod)
+bin_balancing(bin_list, item_list, measure=resource_prod, bin_measure=bin_remaining_cap_prod)
 
 print_bin_list(bin_list)
 
