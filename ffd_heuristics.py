@@ -91,14 +91,14 @@ def bin_balancing(item_list, bin_list, measure=resource_sum, bin_measure=bin_rem
 
 
 
-bin_list = generate_bin_list(4)
-item_list = generate_item_list(10)
+# bin_list = generate_bin_list(4)
+# item_list = generate_item_list(10)
 
 
 
 # bin_list = ffd_bin_centric(bin_list=bin_list, item_list=item_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum)
-bin_list = ffd_item_centric(bin_list=bin_list, item_list=item_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum)
+# bin_list = ffd_item_centric(bin_list=bin_list, item_list=item_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum)
 # bin_list = bin_balancing(bin_list=bin_list, item_list=item_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum)
 
-print_bin_list(bin_list)
+# print_bin_list(bin_list)
 
