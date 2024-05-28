@@ -4,7 +4,7 @@ from functions import *
 
 
 
-def ffd_item_centric(bin_list, item_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum):
+def ffd_item_centric(item_list, bin_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum):
     """Item centric first fit decrease algorithm"""
     print_item_list(item_list)
  
@@ -31,7 +31,7 @@ def ffd_item_centric(bin_list, item_list, measure=resource_sum, bin_measure=bin_
 
     return bin_list
 
-def ffd_bin_centric(bin_list, item_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum):
+def ffd_bin_centric(item_list, bin_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum):
     "Bin centric first fit decrease algorithm"
 
     # static pre-sorting of lists with given measures. Sorted in decreasing order.
@@ -57,7 +57,7 @@ def ffd_bin_centric(bin_list, item_list, measure=resource_sum, bin_measure=bin_r
     return bin_list
 
 
-def bin_balancing(bin_list, item_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum):
+def bin_balancing(item_list, bin_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum):
     """First fit decrease algorithm with bin balancing"""
 
     # Static pre-sorting of lists with given measures
@@ -97,9 +97,9 @@ item_list = generate_item_list(10)
 
 
 
-ffd_bin_centric(bin_list, item_list, measure=resource_prod, bin_measure=bin_remaining_cap_prod)
-# ffd_item_centric(bin_list, item_list, measure=resource_prod, bin_measure=bin_remaining_cap_prod)
-# bin_balancing(bin_list, item_list, measure=resource_prod, bin_measure=bin_remaining_cap_prod)
+# ffd_bin_centric(bin_list=bin_list, item_list=item_list, measure=resource_prod, bin_measure=bin_remaining_cap_prod)
+# ffd_item_centric(bin_list=bin_list, item_list=item_list, measure=resource_prod, bin_measure=bin_remaining_cap_prod)
+bin_balancing(bin_list=bin_list, item_list=item_list, measure=resource_prod, bin_measure=bin_remaining_cap_prod)
 
 print_bin_list(bin_list)
 
