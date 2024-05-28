@@ -11,3 +11,9 @@ def bin_remaining_cap_sum(bin):
     
 def bin_remaining_cap_prod(bin):
     return np.prod(bin.remaining_cap)
+
+def bin_max_cap_sum(bin):
+    return np.sum(bin.max_cap)
+
+def bin_max_cap_prod(bin):
+    return np.prod(bin.max_cap)

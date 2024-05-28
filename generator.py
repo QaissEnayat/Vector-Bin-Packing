@@ -1,11 +1,12 @@
 from bins import Item, Bin
 from random import randint
+import numpy as np
 
 ITEM_DIMENSION = 3
 MAX_RESOURCE = 10
 MIN_RESOURCE = 1
-MAX_CAPACITY = 10
-MIN_CAPACITY = 10
+MAX_CAPACITY = 50
+MIN_CAPACITY = 40
 
 
 def random_item(min_resource, max_resource, dim):
@@ -55,7 +56,7 @@ def print_item_list(items):
 
 def print_bin_list(bin_list):
     for n in range(0, len(bin_list)):
-        print(f"Bin{n+1} - Max Capacity: {bin_list[n].max_cap}, Remaining: {bin_list[n].remaining_cap}, Items: {[item.resources for item in bin_list[n].items]}")
+        print(f"Bin with Capacity: {bin_list[n].max_cap}, Remaining: {bin_list[n].remaining_cap}, Items: {np.array([item.resources for item in bin_list[n].items]).tolist()}")
 
 item = random_item(min_resource=MIN_RESOURCE, max_resource=MAX_RESOURCE, 
                    dim=ITEM_DIMENSION)

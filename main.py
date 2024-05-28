@@ -1,8 +1,5 @@
-import numpy as np 
-from bins import Bin, Item
-from pprint import pprint
-from generator import *
 from bfd_heuristics import *
+from ffd_heuristics import *
 
 
 items = generate_item_list(10)
@@ -11,4 +8,13 @@ bins = generate_bin_list(10)
 # bin_list = [bin.remaining_cap for bin in bins]
 # print(bin_list)
 
-bfd_item_centric(items,bins)
+print_bin_list(sorted(bins,key=bin_max_cap_sum, reverse=False))
+print_item_list(sorted(items, key=resource_sum, reverse=True))
+print('---------------------------------------------------------')
+print('----------------Bins after algorithm --------------------')
+print('---------------------------------------------------------')
+bins = bfd_bin_centric(items,bins)
+# ffd_item_centric(items,bins)
+
+#print_item_list(np.array(items))
+print_bin_list(sorted(bins,key=bin_max_cap_sum, reverse=False))
