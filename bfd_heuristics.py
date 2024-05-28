@@ -14,7 +14,7 @@ def bfd_item_centric(items, bins, measure=resource_sum, bin_measure=bin_remainin
         for i in range(0, len(bins)):
             biggest_item = items[0]
             if i == len(bins)-1 and np.all(biggest_item.resources <= bins[i].remaining_cap) == False:
-                return print(f'Item {np.array(biggest_item.resources)} can\'t be placed in any other bin anymore. Aborting algorithm!')
+                return print(f'Item {np.array([item.resources for item in items]).tolist()} can\'t be placed in any other bin anymore. Aborting algorithm!')
             if np.all(biggest_item.resources <= bins[i].remaining_cap) == False:
                 continue
             bins[i].insert_item(biggest_item)
@@ -35,7 +35,8 @@ def bfd_bin_centric(items, bins, measure=resource_sum, bin_measure=bin_remaining
 
     while bins:
         smallest_bin = bins[0]
-        if any(items):
+        #feasible_items = [item.resources for item in items if all(item.resources <= smallest_bin.remaining_cap)]
+        if items:
             biggest_item = items[0]
         else:
             break
@@ -44,16 +45,20 @@ def bfd_bin_centric(items, bins, measure=resource_sum, bin_measure=bin_remaining
         #     if np.all(item.resources <= smallest_bin.remaining_cap):
         #         bins[0].insert_item(item)
         #         items.pop(items.index(item))
-        while np.all(biggest_item.resources <= smallest_bin.remaining_cap):
-            if any(items):
-                biggest_item = items.pop(0)
+        i = 0
+        while i <= len(items):
+            if items and np.all((biggest_item.resources <= smallest_bin.remaining_cap)):
+                biggest_item = items.pop(i) 
                 bins[0].insert_item(biggest_item)
+            elif items:
+                i += 1
+                continue
             else:
                 break
         bins_filled.append(bins[0])
         bins.pop(0)
             
-    if any(items) == False:
+    if any(items):
         print(f'Items {np.array([item.resources for item in items]).tolist()} haven\'t been packed. Algorithm failed!')
         return bins_filled
     
