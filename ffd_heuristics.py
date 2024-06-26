@@ -6,12 +6,12 @@ from functions import *
 
 def ffd_item_centric(item_list, bin_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum):
     """Item centric first fit decrease algorithm"""
-    print_item_list(item_list)
+    # print_item_list(item_list)
  
     # static pre-sorting of lists with given measures. Sorted in decreasing order.
     bin_list = sorted(bin_list, key=bin_measure, reverse=False)
     item_list = sorted(item_list, key=measure, reverse=True)
-    print_item_list(item_list)
+    #print_item_list(item_list)
 
     while item_list:
         #Iterate through bin list
@@ -21,7 +21,7 @@ def ffd_item_centric(item_list, bin_list, measure=resource_sum, bin_measure=bin_
                 bin_list[i].insert_item(item_list[0])
                 item_list.pop(0)  
                 # Printing list at every step for testing purposes.
-                print_item_list(item_list)
+                #print_item_list(item_list)
                 break
 
             # Item could not be inserted anywhere
@@ -47,7 +47,7 @@ def ffd_bin_centric(item_list, bin_list, measure=resource_sum, bin_measure=bin_r
             item_list.pop(0)
 
             # Printing list at every step for testing purposes.
-            print_item_list(item_list)
+            # print_item_list(item_list)
     
     # Item could not be inserted anywhere
     if item_list:

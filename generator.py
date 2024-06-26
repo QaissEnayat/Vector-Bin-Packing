@@ -2,7 +2,7 @@ from bins import Item, Bin
 from random import randint
 import numpy as np
 
-ITEM_DIMENSION = 3
+ITEM_DIMENSION = 500
 MAX_RESOURCE = 20
 MIN_RESOURCE = 1
 MAX_CAPACITY = 50
@@ -60,6 +60,23 @@ def print_bin_list(bin_list):
 
 item = random_item(min_resource=MIN_RESOURCE, max_resource=MAX_RESOURCE, 
                    dim=ITEM_DIMENSION)
+
+
+def count_bins_and_items(bin_list):
+    """Counts number of bins filled and number of items fitted"""
+    bins_filled = 0
+    items_fitted = 0
+
+    for bin in bin_list:
+        if len(bin.items) != 0: 
+            bins_filled += 1
+            items_fitted += len(bin.items)
+
+    print(f"Number of bins filled: {bins_filled}, "
+          f"Number of items fitted: {items_fitted}")
+
+
+
 
 # print(item.resources)
 
