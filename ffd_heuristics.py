@@ -77,7 +77,7 @@ def bin_balancing(item_list, bin_list, measure=resource_sum, bin_measure=bin_rem
 
                 # Printing lists at every step for thes purposes
                 # print_bin_list(bin_list)
-                print_item_list(item_list)
+                # print_item_list(item_list)
                 break
 
             # Item could not be inserted anywhere

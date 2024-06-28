@@ -68,7 +68,7 @@ def count_bins_and_items(bin_list):
     items_fitted = 0
 
     for bin in bin_list:
-        if  np.all(bin.remaining_cap != bin.max_cap) == True: 
+        if  np.any(bin.remaining_cap != bin.max_cap) == True: 
             bins_filled += 1
             items_fitted += len(bin.items)
 
