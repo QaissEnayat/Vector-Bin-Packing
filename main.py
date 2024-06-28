@@ -17,8 +17,10 @@ def test_runtimes(algorithms, items, bins, measure=resource_sum):
         print("")
 
 
-items = generate_item_list(100)
-bins = generate_bin_list(40)
+# data = np.load('data_dim_50.npz',allow_pickle=True)
+# items = data['items']
+items = generate_item_list(10000)
+bins = generate_bin_list(6000)
 
 # bin_list = [bin.remaining_cap for bin in bins]
 # print(bin_list)
@@ -31,6 +33,7 @@ bins = generate_bin_list(40)
 
 #Test ffd_item_centric
 
+#algorithm_list = ["bfd_item_centric", "bfd_bin_centric"]
 algorithm_list = ["ffd_item_centric","bfd_item_centric","ffd_bin_centric","bfd_bin_centric", "bin_balancing"]
 test_runtimes(algorithms=algorithm_list, items=items, bins=bins)
 test_runtimes(algorithms=algorithm_list, items=items, bins=bins, measure=resource_prod)
@@ -38,7 +41,7 @@ test_runtimes(algorithms=algorithm_list, items=items, bins=bins, measure=resourc
 
 
 
-# #bfd_item_centric(items,bins)
+# bfd_item_centric(items,bins)
 # # ffd_item_centric(items,bins)
 
 # print_item_list(np.array(items))

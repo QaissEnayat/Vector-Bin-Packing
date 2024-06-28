@@ -3,7 +3,7 @@ from random import randint
 import numpy as np
 
 ITEM_DIMENSION = 3
-MAX_RESOURCE = 20
+MAX_RESOURCE = 15
 MIN_RESOURCE = 1
 MAX_CAPACITY = 50
 MIN_CAPACITY = 40

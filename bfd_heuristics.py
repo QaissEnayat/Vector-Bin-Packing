@@ -18,10 +18,16 @@ def bfd_item_centric(items, bins, measure=resource_sum, bin_measure=bin_remainin
             if np.all(biggest_item.resources <= bins[i].remaining_cap) == False:
                 continue
             bins[i].insert_item(biggest_item)
-            bins = sorted(bins, key=bin_measure)
+            
+            
+            # bins = sorted(bins, key=bin_measure)
+            # print_bin_list(bins)
+            # print("___")
+            bins = move_bin(bin_list=bins, bin=bins[i], measure=bin_measure)
             items.pop(0)
             break
         # print_bin_list(bins)
+        # print("-")
     # TODO: return Bins with items
     return bins
 
