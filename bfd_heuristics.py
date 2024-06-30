@@ -3,7 +3,7 @@ from generator import *
 from functions import *
 
 def bfd_item_centric(items, bins, measure=resource_sum, bin_measure=bin_remaining_cap_sum):
-    """Places Items into bins with BFD Item Centric algorithm."""
+    """Item centric best fit decrease algorithm"""
     items = sorted(items, key=measure, reverse=True)
     # counter = 0 
     while items:
@@ -32,7 +32,7 @@ def bfd_item_centric(items, bins, measure=resource_sum, bin_measure=bin_remainin
     return bins
 
 def bfd_bin_centric(items, bins, measure=resource_sum, bin_measure=bin_remaining_cap_sum):
-    """Places Items into bins with BFD Bin Centric algorithm."""
+    """Bin centric first fit decrease algorithm"""
 
     # Prints the Item and Bin list. Item and Bin List will be shown unsorted and sorted with timsort included in python
     items = sorted(items, key=measure, reverse=True)
@@ -52,10 +52,11 @@ def bfd_bin_centric(items, bins, measure=resource_sum, bin_measure=bin_remaining
         #         bins[0].insert_item(item)
         #         items.pop(items.index(item))
         i = 0
-        while i <= len(items):
+        while i < len(items):
+            biggest_item = items[i]
             if items and np.all((biggest_item.resources <= smallest_bin.remaining_cap)):
                 biggest_item = items.pop(i) 
-                bins[0].insert_item(biggest_item)
+                smallest_bin.insert_item(biggest_item)
             elif items:
                 i += 1
                 continue
@@ -63,7 +64,7 @@ def bfd_bin_centric(items, bins, measure=resource_sum, bin_measure=bin_remaining
                 break
         bins_filled.append(bins[0])
         bins.pop(0)
-            
+
     if any(items):
         print(f'Items {np.array([item.resources for item in items]).tolist()} haven\'t been packed. Algorithm failed!')
         return bins_filled
