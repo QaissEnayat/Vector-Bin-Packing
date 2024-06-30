@@ -34,6 +34,9 @@ def bfd_bin_centric(items, bins, measure=resource_sum, bin_measure=bin_remaining
     bins_filled = []
 
     while bins:
+        if not items:
+            bins_filled = bins_filled + bins
+            break
         smallest_bin = bins[0]
         #feasible_items = [item.resources for item in items if all(item.resources <= smallest_bin.remaining_cap)]
         # smallest_bin_index = [bin.remaining_cap for bin in bins].index(min([bin.remaining_cap for bin in bins]))
