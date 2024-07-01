@@ -6,7 +6,7 @@ import copy
 
 
 data = np.load('data_dim_demo.npz',allow_pickle=True)
-items = data['items']
+items = sorted(data['items'], key=resource_sum, reverse=True)
 bins  = data['bins']
 
 
