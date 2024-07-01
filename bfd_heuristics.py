@@ -48,13 +48,10 @@ def bfd_bin_centric(items, bins, measure=resource_sum, bin_measure=bin_remaining
         while i < len(items):
             biggest_item = items[i]
             if items and np.all((biggest_item.resources <= smallest_bin.remaining_cap)):
-                biggest_item = items.pop(i) 
+                items.pop(i) 
                 smallest_bin.insert_item(biggest_item)
-            elif items:
-                i += 1
-                continue
             else:
-                break
+                i += 1
         bins_filled.append(bins[0])
         bins.pop(0)
 
