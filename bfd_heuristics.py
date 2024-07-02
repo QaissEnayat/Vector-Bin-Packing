@@ -40,6 +40,7 @@ def bfd_bin_centric(items, bins, measure=resource_sum, bin_measure=bin_remaining
     bins_filled = []
 
     while bins:
+        bins = sorted(bins, key=bin_measure)
         if not items:
             bins_filled = bins_filled + bins
             break
@@ -52,6 +53,7 @@ def bfd_bin_centric(items, bins, measure=resource_sum, bin_measure=bin_remaining
         #         items.pop(items.index(item))
         i = 0
         while i < len(items):
+            items = sorted(items, key=measure, reverse=True)
             biggest_item = items[i]
             if items and np.all((biggest_item.resources <= smallest_bin.remaining_cap)):
                 items.pop(i) 
