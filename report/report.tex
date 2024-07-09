@@ -7,6 +7,7 @@
 \usepackage[colorlinks=true,linkcolor=red,citecolor=blue]{hyperref}
 \usepackage[USenglish]{babel}
 \usepackage{lipsum}
+\usepackage{hyperref}
 \bibliographystyle{abbrvnat}
 \frenchspacing
 \begin{document}
@@ -20,6 +21,7 @@
 \tableofcontents
 \pagebreak
 \section{Introduction}
+\cite{heuristicsvbp}
 \lipsum[1-5]
 \section{Main Body}
 \lipsum[5-7]
@@ -38,7 +40,13 @@ w=0\,.
 \section{Discussion and outlook}
 \lipsum[1-4]
 \section{Bibliography}
-\lipsum[1-2]
+\begin{thebibliography}{2}
+    \bibitem{heuristicsvbp}
+    R. Panigrahy, K. Talwar, L. Uyeda, and U. Wieder. "Heuristics for vector bin packing". Technical report, 2011. \url{https://www.microsoft.com/en-us/research/publication/heuristics-for-vector-bin-packing/}
+
+    \bibitem{vsvbp}
+    M. Gabay, S. Zaourar, "Variable size vector bin packing heuristics - Application to the machine reassignment problem", 2013. \url{https://hal.science/hal-00868016v3} 
+\end{thebibliography}
 \section{Declaration of originality}
 We hereby declare in lieu of an oath that we have written this thesis independently and have not used any resources other than those specified - in particular no Internet sources not named in the list of sources. The parts of the work that are taken from other works (this also includes internet sources) in wording or in spirit have been identified and the source has been indicated. We further assure that we have not previously submitted the work in another examination procedure and that the written version submitted corresponds to that on the electronic storage medium.
 \end{document}
