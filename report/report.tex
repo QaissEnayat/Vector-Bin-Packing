@@ -8,8 +8,10 @@
 \usepackage[USenglish]{babel}
 \usepackage{lipsum}
 \usepackage{hyperref}
+\usepackage{algorithm2e}
 \bibliographystyle{abbrvnat}
 \frenchspacing
+\RestyleAlgo{ruled}
 \begin{document}
 
 \begin{titlepage}
@@ -37,6 +39,97 @@ v=\frac{x}{x^2+y^2}\,,\quad\text{and}\quad
 w=0\,.
 \]
 \lipsum[1-3]
+
+\subsection{Bin Vector Packing}
+\subsection{Approximation measures}
+\subsection{Bin Packing Algorithms}
+\begin{algorithm}
+
+	\caption{FFD Item Centric}\label{alg:two}
+	
+	sort bins in increasing order\;
+	sort items in decreasing order\;
+	\While{unpacked items exist}{
+		pack item in first feasible bin\;
+		\If{item can not be packed}{\Return {failure}\;}}
+	
+	\Return{success\;}	
+	
+\end{algorithm}
+	
+\begin{algorithm}
+	
+	\caption{FFD Bin Centric}\label{alg:two}
+	
+	sort bins in increasing order\;
+	sort items in decreasing order\;
+	\While{list of bins not empty}{
+		Select smallest bin b\;
+		\While{an unpacked item fits into b}{Pack the biggest feasible item into b\;}}
+		Remove b from list of bins\;
+		
+	\If{An item has not been packed}{\Return {failure}\;}
+	
+	\Return{success\;}	
+	
+\end{algorithm}	
+
+
+\begin{algorithm}
+	
+		\caption{BFD Item Centric}\label{alg:two}
+		sort bins in increasing order\;
+		sort items in decreasing order\;
+		\While{there are unpacked items}{
+			Pack biggest item into smallest feasible bin\;
+			\If{item can not be packed}{
+				\Return{failure\;}
+				}
+			sort bin\;
+			}
+		\Return{success\;}
+\end{algorithm}
+
+\begin{algorithm}
+	
+	\caption{NFD Bin Centric}\label{alg:two}
+	sort bins in increasing order\;
+	sort items in decreasing order\;
+	
+	\For{bins in bin list}{
+		\While{item list not empty}{
+			\If{item can not be packed}{got to next bin\;}
+		}
+	}
+	\If{item list not empty}{
+		\Return failure\;
+		}
+		
+	\Return{success\;}
+\end{algorithm}
+
+
+\begin{algorithm}
+	
+	\caption{Bin Balancing}\label{alg:two}
+	sort bins in increasing order\;
+	sort items in decreasing order\;
+	
+	\While{unpacked items exist}{
+		pack item into first feasible bin\;
+		move that bin to the end of the bin list\;
+		\If{item can not be packed}{
+			\Return{failure\;}
+			}
+	}
+	
+	\Return{succes\;}
+\end{algorithm}
+
+
+\subsection{Experiment}
+\subsection{Results}
+
 \section{Discussion and outlook}
 \lipsum[1-4]
 \section{Bibliography}
@@ -49,4 +142,6 @@ w=0\,.
 \end{thebibliography}
 \section{Declaration of originality}
 We hereby declare in lieu of an oath that we have written this thesis independently and have not used any resources other than those specified - in particular no Internet sources not named in the list of sources. The parts of the work that are taken from other works (this also includes internet sources) in wording or in spirit have been identified and the source has been indicated. We further assure that we have not previously submitted the work in another examination procedure and that the written version submitted corresponds to that on the electronic storage medium.
+
+\section{Author Contributions} 
 \end{document}
