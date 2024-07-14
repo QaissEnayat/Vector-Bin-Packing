@@ -23,42 +23,70 @@
 \tableofcontents
 \pagebreak
 \section{Introduction}
-\cite{heuristicsvbp}
-\lipsum[1-5]
+The vector bin packing problem is a generalization of the classical bin packing problem. It is inspired by modeling of virtual machine placement. Hereby the bins represent the available virtual machines, while the items that will be packed into the bins, represent the services, that can be allocated to those machines. As these services necessitate allocation of several different resources, e.g. CPU, RAM and storage space, these additional constraints need to be accounted for. Thus additional dimensions arise to describe these different resources.
+
+As there has already been work done regarding the vector bin problem, our goal is to compile some methods used to solve this problem and compare them to each other.
+
 \section{Main Body}
-\lipsum[5-7]
-\[
-\int_a^bu\frac{d^2v}{dx^2}\,dx
-=\left.u\frac{dv}{dx}\right|_a^b
--\int_a^b\frac{du}{dx}\frac{dv}{dx}\,dx.
-\]
-\lipsum[8]
-\[
-u=\frac{-y}{x^2+y^2}\,,\quad
-v=\frac{x}{x^2+y^2}\,,\quad\text{and}\quad
-w=0\,.
-\]
-\lipsum[1-3]
 
 \subsection{Bin Vector Packing}
-\subsection{Approximation measures}
-\subsection{Bin Packing Algorithms}
-\begin{algorithm}
+As aforementioned the vector bin packing problem is a generalization of the classical bin packing problem. In the bin packing problem we are handling two types of objects. One the one hand we have items, that are defined by their size. One the other hand we have bins, that are defined by their capacity. Each bin has the ability to hold an undefined number of items. Thereby the accumulated size of the items packed into a bin is not allowed to exceed that bins capacity.
 
+The goal for the bin packing problem is to find feasible packings for our items and bins, ideally minimizing the amount of bins used and the time to find these packings.
+
+For the vector bin packing problem the capacities and sizes of our bins and items, rather than being singular values, will be represented by multidimensional vectors. This gives rise to additional challenges regarding the handling of those object.
+
+There were several solutions proposed to handle this issue, which we will cover in the following section. 
+
+
+\subsection{Approximation measures}
+As ordering of bins and items gets increasingly difficult with higher dimensions it is necessary to find methods that fulfill this task in an efficient and timely manner.  
+
+One such method is to find appropriate approximations for the sizes of our bins and items, by which they can be ordered.
+
+For this work we have chosen the simplest measures by which multidimensional vectors can be approximated, that is computing a weight value for the bins and items by taking the sum of their values or calculating the product of those values respectively. 
+Such, it is possible to order them by those singular weight values.
+
+
+
+\[
+w(I)=\sum_{i\leqq d} I_i 
+\] 
+
+\[
+w(I)=\prod_{i\leqq d} I_i 
+\] 
+
+\subsection{Bin Packing Algorithms}
+
+Applying one of the aforementioned measures to compute the weight of our bins and items. It is now possible to handle them with classical bin packing algorithms.
+
+Based on previous work, we have decided to compare the FFD and BFD algorithms. In addition, we have looked at the NFD algorithm and for an alternative approach to the bin packing problem, we have looked at the bin balancing algorithm.
+
+
+\paragraph{The First Fit Decreasing (FFD) Algorithm}
+\mbox{} \\
+The First Fit Decreasing algorithm is a classical bin packing algorithm that seeks to find good item placement in an adequate time. Its main idea to achieve this is to pack an item into the first the first feasible bin of the bin list. To increase the effectiveness of the packing, bins and items will be sorted beforehand. Hereby items will be sorted in decreasing order and bins in increasing order, such that larger items will be packed into smaller bins, thus improving item placement in comparison to unsorted packing.
+
+In the work of Panigrahy et al an alternative approach to the FFD algorithm was presented. There he named the typical FFD variant the item centric view and introduced the bin centric view.
+
+Whereas the item centric view takes an item to look for the first feasible bin, the bin centric view takes a bin and packs the first feasible items into that bin.
+
+As we will later work with a limited amount of bins and items, we have adapted the FFD algorithm proposed by Panigrahy et al, to satisfy that requirement.
+
+
+\begin{algorithm}
 	\caption{FFD Item Centric}\label{alg:two}
 	
 	sort bins in increasing order\;
 	sort items in decreasing order\;
 	\While{unpacked items exist}{
 		pack item in first feasible bin\;
-		\If{item can not be packed}{\Return {failure}\;}}
-	
+		\If{item can not be packed}{\Return {failure}\;}}	
 	\Return{success\;}	
-	
 \end{algorithm}
 	
 \begin{algorithm}
-	
 	\caption{FFD Bin Centric}\label{alg:two}
 	
 	sort bins in increasing order\;
@@ -66,13 +94,16 @@ w=0\,.
 	\While{list of bins not empty}{
 		Select smallest bin b\;
 		\While{an unpacked item fits into b}{Pack the biggest feasible item into b\;}}
-		Remove b from list of bins\;
-		
+		Remove b from list of bins\;	
 	\If{An item has not been packed}{\Return {failure}\;}
-	
 	\Return{success\;}	
-	
 \end{algorithm}	
+
+
+\paragraph{The Best Fit Decreasing (BFD) Algorithm}
+\mbox{} \\
+
+The Best Fit Decreasing algorithm, as its name suggests, aims to find the best fit for the item it is currently packing. Similar to the FFD it iterates through the list of items and packs it into a feasible bin. Although in contrast to the FFD, where the order of the bins remains static after the initial sorting, the BFD resorts the order of bins after every packing. This ensures that the item will be packed into the smallest feasible bin. 
 
 
 \begin{algorithm}
@@ -89,6 +120,14 @@ w=0\,.
 			}
 		\Return{success\;}
 \end{algorithm}
+
+
+\paragraph{The Next Fit Decreasing (NFD) Algorithm}
+\mbox{} \\
+
+Next we have the Next Fit Decreasing algorithm. This time we have chosen the bin centric view for our tests. Again, similar to the FFD it takes a bin and iterates through the list of items, packing the item if it is feasible. The main difference of the NFD to the FFD lies in its behavior, if an item placement is not feasible. There it will skip the current bin for the next bin in the list, such that easier finding of feasible packings is possible.
+Thus, in exchange for effective item placement, we should be able to achieve faster run times. 
+
 
 \begin{algorithm}
 	
@@ -107,6 +146,13 @@ w=0\,.
 		
 	\Return{success\;}
 \end{algorithm}
+
+\paragraph{Bin Balancing}
+\mbox{} \\
+
+After having looked at algorithms that try to find feasible packings with minimal bin use, let us look at an alternative approach to bin packing. Suppose we run into a scenario where minimal bin use is of no concern to us, e.g. the virtual machines are active, regardless whether it currently runs services or not, balanced distribution of these services may be of greater interest. To find these well distributed packings is the aim of the bin balancing algorithm.
+Like the FFD algorithm before, we sort our list of items and bins, such that larger items will be packed into smaller bins in a first fit approach. Better distribution of our items is achieved by moving the bin that was recently packed into to the end of the bin list. This should ensure, that that particular bin is not chosen again for packing before every other bin was packed into. As a result it is unlikely for a bin to fill up early, thus making it easy to find still find feasible packings for that bin. 
+This approach stands in contrast to our primary goal of looking for algorithms that minimize bin usage, nevertheless, comparisons of run times may prove to be of interest.
 
 
 \begin{algorithm}
