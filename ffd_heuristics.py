@@ -30,7 +30,7 @@ def ffd_item_centric(item_list, bin_list, measure=resource_sum, bin_measure=bin_
 
     return bin_list
 
-def ffd_bin_centric(item_list, bin_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum):
+def nfd_bin_centric(item_list, bin_list, measure=resource_sum, bin_measure=bin_remaining_cap_sum):
     "Bin centric first fit decrease algorithm"
 
     # static pre-sorting of lists with given measures. Sorted in decreasing order.
